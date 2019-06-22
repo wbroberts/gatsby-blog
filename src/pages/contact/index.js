@@ -1,26 +1,26 @@
-import React from 'react'
-import { navigate } from 'gatsby-link'
-import Layout from '../../components/Layout'
+import React from 'react';
+import { navigate } from 'gatsby-link';
+import Layout from '../../components/Layout';
 
 function encode(data) {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
+    .join('&');
 }
 
 export default class Index extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { isValidated: false }
+    super(props);
+    this.state = { isValidated: false };
   }
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   handleSubmit = e => {
-    e.preventDefault()
-    const form = e.target
+    e.preventDefault();
+    const form = e.target;
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -30,16 +30,16 @@ export default class Index extends React.Component {
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
-      .catch(error => alert(error))
-  }
+      .catch(error => alert(error));
+  };
 
   render() {
     return (
       <Layout>
-        <section className="section">
-          <div className="container">
-            <div className="content">
-              <h1>Contact</h1>
+        <section className="bg-green-300">
+          <div className="container m-auto text-gray-800 text-xl">
+            <div className="py-6">
+              <h1 className="text-3xl mb-8">Contact</h1>
               <form
                 name="contact"
                 method="post"
@@ -60,9 +60,9 @@ export default class Index extends React.Component {
                   <label className="label" htmlFor={'name'}>
                     Your name
                   </label>
-                  <div className="control">
+                  <div className="my-4">
                     <input
-                      className="input"
+                      className="border p-2 w-full"
                       type={'text'}
                       name={'name'}
                       onChange={this.handleChange}
@@ -77,7 +77,7 @@ export default class Index extends React.Component {
                   </label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="border p-2 w-full"
                       type={'email'}
                       name={'email'}
                       onChange={this.handleChange}
@@ -92,7 +92,7 @@ export default class Index extends React.Component {
                   </label>
                   <div className="control">
                     <textarea
-                      className="textarea"
+                      className="border p-2 w-full"
                       name={'message'}
                       onChange={this.handleChange}
                       id={'message'}
@@ -110,6 +110,6 @@ export default class Index extends React.Component {
           </div>
         </section>
       </Layout>
-    )
+    );
   }
 }
